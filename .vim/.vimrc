@@ -68,6 +68,9 @@ Plugin 'vim-syntastic/syntastic'
 "tagbar
 Plugin 'preservim/tagbar'
 
+"vim tmux navigator
+Plugin 'christoomey/vim-tmux-navigator'
+
 call vundle#end()
 
 "turn on three useful option
