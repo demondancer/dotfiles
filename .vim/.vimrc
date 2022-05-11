@@ -143,10 +143,10 @@ endif
 
 "must come before setting color scheme
 let g:gruvbox_contrast_dark='hard'
+"must come before setting colorscheme,and before turning syntax on
+set background=dark
 "vim color scheme
 colorscheme gruvbox
-"must come before turning syntax on
-set background=dark
 
 "syntax highlighting
 syntax on
