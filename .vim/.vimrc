@@ -1,0 +1,285 @@
+"********** Vundle **********
+
+"vundle requires filetype off
+filetype off
+
+"set the runtime path to include vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+"let vundle manage vundle,required
+Plugin 'VundleVim/Vundle.vim'
+
+"easymotion/vim-easymotion
+Plugin 'easymotion/vim-easymotion'
+
+"file system explore
+Plugin 'preservim/nerdtree'
+
+"comment stuff out
+Plugin 'preservim/nerdcommenter' 
+
+"an efficient fuzzy files finder
+Plugin 'Yggdroot/LeaderF'
+
+"enhances Netrw
+Plugin 'tpope/vim-vinegar'
+
+"color scheme
+Plugin 'morhetz/gruvbox'
+
+"automatically clear search highlights after you move your cursor
+Plugin 'haya14busa/is.vim'
+
+"make the yanked region apparent
+Plugin 'machakann/vim-highlightedyank'
+
+"repeat
+Plugin 'tpope/vim-repeat'
+
+"a number of useful motions
+"Plugin 'tpope/vim-unimpaired'
+
+"all about surroundings
+"Plugin 'tpope/vim-surround'
+
+"a status line
+Plugin 'vim-airline/vim-airline'
+
+"airline themes
+Plugin 'vim-airline/vim-airline-themes'
+
+"shows a git diff in the sign column
+Plugin 'airblade/vim-gitgutter'
+
+"fugitive
+Plugin 'tpope/vim-fugitive'
+
+"super tab
+Plugin 'ervandew/supertab'
+
+"python autocompletion
+Plugin 'davidhalter/jedi-vim'
+
+"syntax checking
+Plugin 'vim-syntastic/syntastic'
+
+"tagbar
+Plugin 'preservim/tagbar'
+
+call vundle#end()
+
+"turn on three useful option
+filetype plugin indent on
+
+"close vim or a tab automatically when nerdtree is the last window
+"exit vim if nerdtree is the only window remaining in the only tab
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"close the tab if NERDTree is the only window remaining in it
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"do not replace Netrw
+let NERDTreeHijackNetrw = 0
+
+"align delimiters left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+"empty lines
+let g:NERDCommentEmptyLines = 1
+"white spaces
+let g:NERDTrimTrailingWhitespace = 1
+"check
+let g:NERDToggleCheckAllLines = 1
+
+"chang the default mapping of searching files command
+let g:Lf_ShortcutF = '<c-p>'
+
+"highlight yank
+let g:highlightedyank_highlight_duration = 2000
+
+"get a list of counts of git diffs from the status line
+function! GitStatus()
+    let [a,m,r] = GitGutterGetHunkSummary()
+    return printf('+%d ~%d -%d',a,m,r)
+endfunction
+set statusline+=%{GitStatus()}
+
+"airline theme
+let g:airline_theme = 'dark'
+
+"fugitive
+set statusline+=%{FugitiveStatusline()}
+
+"syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"********** END VUNDLE **********
+
+"********** SETTINGS **********
+
+"use vim,not vi
+set nocompatible
+
+"utf-8
+set encoding=utf-8
+
+"coding method used by the terminal
+set termencoding=utf-8
+
+"Enable 24-bit true colors if your terminal supports it.
+if (has("termguicolors"))
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+"must come before setting color scheme
+let g:gruvbox_contrast_dark='hard'
+"vim color scheme
+colorscheme gruvbox
+"must come before turning syntax on
+set background=dark
+
+"syntax highlighting
+syntax on
+
+"show line number
+set number
+
+"show the relative line number
+"set relativenumber
+
+"set the number of spaces indented when the Tab key is pressed
+set tabstop=4
+
+"the Tab key will be replaced with the spaces
+set expandtab
+
+"the number of spaces used for automatic indentation
+set shiftwidth=4
+
+"smart indent
+set smartindent
+
+"show partial command
+set showcmd
+
+"displays the null characters at the end of line
+set list listchars=trail:.
+
+
+"highlight search results
+set hlsearch
+
+"if you use at least one uppercase letter in the mode,the search becomes case-sensitive
+set incsearch ignorecase
+
+"no ignorecase,if uppercase char present
+set smartcase
+
+"highlight the cursor line
+set cursorline
+
+"cursor shape:
+"reference chart of values:
+"Ps = 0 -> blinking block
+"Ps = 1 -> blinking block(default)
+"Ps = 2 -> steady block
+"Ps = 3 -> blinking underline
+"Ps = 4 -> steady underline
+"Ps = 5 -> blinking bar(xterm)
+"Ps = 6 -> steady bar(xterm)
+"cursor shape in normal mode
+let &t_EI = "\e[3 q"
+"cursor shape in insert mode
+let &t_SI = "\e[5 q"
+
+"auto read file,if the current file is modified outside vim
+set autoread
+
+"set the title of vim window
+set title
+
+"do not use swap file
+set noswapfile
+
+"do not use the undo history file
+set noundofile
+
+"in multiple windows,close the buffer without closing the window
+command! Bd :bp | :sp | :bn | :bd
+
+"copy to system register(*,+)
+set clipboard=unnamed,unnamedplus
+
+"********** END SETTINGS **********
+
+"********** KEY MAPPING **********
+
+"map the <leader> key to ',',set it up at the beginning of key mapping
+let mapleader = ","
+noremap \ ,
+"time out on mapping after three seconds
+"time out on key codes after ten milliseconds 
+set timeout timeoutlen=2000 ttimeoutlen=10
+
+"NORMAL MODE:
+"navigate around windows
+nnoremap <c-h> <c-w><c-h>
+nnoremap <c-j> <c-w><c-j>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-l> <c-w><c-l>
+
+"map space bar to page down,and backspace to page up
+nnoremap <space> <c-f>
+nnoremap <bs> <c-b>
+
+"map [<space> and ]<space> to add a newline after and before the cursor line
+nnoremap [<space> o<esc>
+nnoremap ]<space> O<esc>
+
+"moving lines
+nnoremap <down> :m .+1<cr>==
+nnoremap <up> :m .-2<cr>==
+inoremap <down> <esc>:m .+1<cr>==gi
+inoremap <up> <esc>:m .-2<cr>==gi
+vnoremap <down> :m '>+1<cr>gv==gv
+vnoremap <up> :m '<-2<cr>gv==gv
+
+"Plug:easymotion key mapping:
+"all motions will be triggered with just one <leader>
+nmap <leader> <Plug>(easymotion-prefix)
+"default:g:EasyMotion_do_mapping is on,and defines the following mappings in normal,visual and operator-pending mode 
+"<leader>f,F,t,T,w,W,b,B,e,E,ge,gE,j,k,n,N,s(find(search) {char} forward and backward)
+let g:EasyMotion_do_mapping = 0
+
+nmap <leader>s <Plug>(easymotion-bd-fl)
+nmap <leader>f <Plug>(easymotion-bd-f)
+nmap <leader>F <Plug>(easymotion-bd-f2)
+nmap <leader>t <Plug>(easymotion-bd-t)
+nmap <leader>w <Plug>(easymotion-bd-w)
+nmap <leader>e <Plug>(easymotion-bd-e)
+nmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+nmap <leader>. <Plug>(easymotion-repeat)
+
+"tagbar
+nnoremap <F8> :TagbarToggle<cr>
+
+"swap two adjacent characters,and this operator can be repeated by .
+"nnoremap <silent> <Plug>SwapCharacters xp :call repeat#set("\<Plug>SwapCharacters")<cr>
+"nmap xp <Plug>SwapCharacters
+
+"********** END KEY MAPPING **********
+
+"********** PYTHON **********
+
+"run python code in vim
+map <F5> :w<cr>:!clear;python3 %<cr>
+
+"********** END PYTHON **********
