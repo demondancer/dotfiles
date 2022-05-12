@@ -274,6 +274,16 @@ nmap <leader>. <Plug>(easymotion-repeat)
 "tagbar
 nnoremap <F8> :TagbarToggle<cr>
 
+"vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <leader> :TmuxNavigatePrevious<cr>
+"write the current buffer before navigating from vim to tmux pane
+let g:tmux_navigator_save_on_switch = 1
+
 "swap two adjacent characters,and this operator can be repeated by .
 "nnoremap <silent> <Plug>SwapCharacters xp :call repeat#set("\<Plug>SwapCharacters")<cr>
 "nmap xp <Plug>SwapCharacters
