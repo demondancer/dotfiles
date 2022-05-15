@@ -290,9 +290,27 @@ let g:tmux_navigator_save_on_switch = 1
 
 "********** END KEY MAPPING **********
 
+"********** AUTO HEADER **********
+
+autocmd BufNewFile *.sh,*.py,*.pl exec ":call AutoHeader()"
+func AutoHeader()
+    if &filetype == 'sh'
+        call setline(1,"#!bin/bash")
+    elseif &filetype == 'python'
+        call setline(1,"#!usr/bin/python3")
+    elseif &filetype == 'perl'
+        call setline(1,"#!usr/bin/perl")
+        call setline(2,"use utf8;")
+        call setline(3,"use v5.30;")
+    endif
+endfunc
+autocmd BufNewFile * normal G
+
+"********** AUTO HEADER **********
+
 "********** PYTHON **********
 
 "run python code in vim
-map <F5> :w<cr>:!clear;python3 %<cr>
+"map <F5> :w<cr>:!clear;python3 %<cr>
 
 "********** END PYTHON **********
