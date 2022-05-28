@@ -292,16 +292,22 @@ let g:tmux_navigator_save_on_switch = 1
 
 "********** AUTO HEADER **********
 
-autocmd BufNewFile *.sh,*.py,*.pl exec ":call AutoHeader()"
+autocmd BufNewFile *.sh,*.py,*.pl,*.rb,*.lua exec ":call AutoHeader()"
 func AutoHeader()
     if &filetype == 'sh'
-        call setline(1,"#!bin/bash")
+        call setline(1,"#!/bin/bash")
     elseif &filetype == 'python'
-        call setline(1,"#!usr/bin/python3")
+        call setline(1,"#!/usr/bin/python3")
     elseif &filetype == 'perl'
-        call setline(1,"#!usr/bin/perl")
-        call setline(2,"use utf8;")
-        call setline(3,"use v5.30;")
+        call setline(1,"#!/usr/bin/perl")
+        call setline(2,"use v5.30;")
+        call setline(3,"use utf8;")
+        call setline(4,"use warnings;")
+    elseif &filetype == 'ruby'
+        call setline(1,"#!/usr/bin/ruby")
+        call setline(2,"#coding=utf-8")
+    elseif &filetype == 'lua'
+        call setline(1,"#!/usr/bin/lua")
     endif
 endfunc
 autocmd BufNewFile * normal G
