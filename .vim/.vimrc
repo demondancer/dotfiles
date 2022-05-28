@@ -295,13 +295,14 @@ let g:tmux_navigator_save_on_switch = 1
 autocmd BufNewFile *.sh,*.py,*.pl exec ":call AutoHeader()"
 func AutoHeader()
     if &filetype == 'sh'
-        call setline(1,"#!bin/bash")
+        call setline(1,"#!/bin/bash")
     elseif &filetype == 'python'
-        call setline(1,"#!usr/bin/python3")
+        call setline(1,"#!/usr/bin/python3")
     elseif &filetype == 'perl'
-        call setline(1,"#!usr/bin/perl")
-        call setline(2,"use utf8;")
-        call setline(3,"use v5.30;")
+        call setline(1,"#!/usr/bin/perl")
+        call setline(2,"use v5.30;")
+        call setline(3,"use utf8;")
+        call setline(4,"use warnings;")
     endif
 endfunc
 autocmd BufNewFile * normal G
