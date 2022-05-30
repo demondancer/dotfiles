@@ -68,6 +68,9 @@ Plugin 'vim-syntastic/syntastic'
 "tagbar
 Plugin 'preservim/tagbar'
 
+"ruby
+Plugin 'vim-ruby/vim-ruby'
+
 "vim tmux navigator
 Plugin 'christoomey/vim-tmux-navigator'
 
